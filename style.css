@@ -5,11 +5,127 @@
 }
 
 body {
-    font-family: sans-serif;
+    font-family: 'Play', sans-serif;
+}
+button{
+    background: none;
+    border: none;
+    cursor: pointer;
 }
 
-form {
-    border: 2px solid black;
-    border-radius: 8px;
+:root{
+    --blue : rgba(34, 55, 233);
+    --blueT : rgba(34, 55, 233, 0.3);
+    --lightGray : rgb(219, 221, 226);
+}
+
+/* ========================================================
+form
+======================================================== */
+
+form{
     padding: 30px;
+    min-width: 400px;
+    width: 40%;
+}
+form fieldset{
+    border-radius: 21px;
+    padding: 20px;
+    text-align: end;    
+}
+form fieldset legend{
+    margin-left: 30px;
+      
+}
+form fieldset #input-phone{    
+    margin: 30px 0;    
+}
+/* form fieldset button{
+    background: none;
+    border: none;
+    cursor: pointer;
+} */
+form fieldset button:hover{
+    scale: 1.5;
+    
+}
+
+/* ========================================================
+list-item
+======================================================== */
+#list-item{
+    display: flex;
+    flex-direction: column;
+}
+.user-item{
+    display: flex;
+    justify-content: space-between;
+    padding: 5px;
+    border: 1px var(--lightGray) solid;
+}
+.delete-button{
+    margin: 0 8px;
+}
+
+/* ========================================================
+modais
+======================================================== */
+
+/* -------------------------------- loader */
+
+#loader {
+    background: var(--blueT);
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+#loader img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* -------------------------------- update */
+
+#update-modal{
+    background: var(--blueT);
+    width: 100vw;
+    height: 100vh;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+
+
+}
+#update-form{
+    background-color: white;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);  
+}
+#update-form p{
+    float: right;
+    cursor: pointer;
+}
+#update-form fieldset{
+    border-radius: 21px;
+    padding: 30px;
+    text-align: end;    
+}
+#update-form fieldset #input-phone{    
+    margin: 30px 0;    
+}
+#update-form fieldset button{
+    border: none;
+    cursor: pointer;
+}
+#update-form fieldset button:hover{
+    scale: 1.5;
+    
 }

@@ -1,16 +1,13 @@
-// ==============================================================================
-// declarations
-// ==============================================================================
 
 const userAPIUrl = 'https://630a617ef280658a59ce43bc.mockapi.io/phoneList';
 const loaderElement = document.querySelector('#loader');
-const formElement = document.querySelector('#form');
+const getForm = document.querySelector('#get-form');
 const nameInput = document.querySelector('#input-name');
 const phoneInput = document.querySelector('#input-phone');
 
-// ==============================================================================
+// ========================================================================
 // show and hide Loader
-// ==============================================================================
+// ========================================================================
 
 const showLoader = () => {
     loaderElement.style.display = 'block'
@@ -19,20 +16,31 @@ const hideLoader = () => {
     loaderElement.style.display = 'none'
 }
 
-// ==============================================================================
+// ========================================================================
 // loadUserList
-// ==============================================================================
+// ========================================================================
 
 const loadUserList = () => {
     showLoader();
     const handleData = (users) => {
         const userListElement = document.querySelector('#users');
         const userNames = users.map(user => `
-            <div class="user-item">
-                <p>${user.name}</p>
-                <p>${user.phone}</p>
-                <button id="delete-button-${user.id}" class="delete-button">x</button>
-            </div>          
+        <section id="list-item">
+            <span class="user-item">
+                <p> 
+                    <strong>Name: </strong> ${user.name} | 
+                    <strong>Phone number: </strong>  ${user.phone}
+                </p>
+                <div >
+                    <button id="update-button-${user.id}" class="update-button">
+                        <img src="img/update.png" width="20px">
+                    </button> 
+                    <button id="delete-button-${user.id}" class="delete-button">
+                        <img src="img/delete.png" width="20px">
+                    </button>
+                </div>
+            </span>     
+        </section>         
         `);
         if (users.length > 0) {
             userListElement.innerHTML = userNames.join('');
@@ -55,9 +63,9 @@ const loadUserList = () => {
     })
 }
 
-// ==============================================================================
+// ========================================================================
 // updateUserList
-// ==============================================================================
+// ========================================================================
 
 // const updateUserList = () => {
 //     showLoader();
@@ -91,9 +99,9 @@ const loadUserList = () => {
 //     })
 // }
 
-// ==============================================================================
+// ========================================================================
 // create user
-// ==============================================================================
+// ========================================================================
 
 const createUser = (newUser) => {
     showLoader();
@@ -107,9 +115,9 @@ const createUser = (newUser) => {
     })
 }
 
-// ==============================================================================
+// ========================================================================
 // delete user
-// ==============================================================================
+// ========================================================================
 
 const deleteUser = (userId) => {
     showLoader();
@@ -122,9 +130,9 @@ const deleteUser = (userId) => {
     })
 }
 
-// ==============================================================================
+// ========================================================================
 // update user
-// ==============================================================================
+// ========================================================================
 
 const updateUser = (userId) => {
     showLoader();
@@ -139,11 +147,11 @@ const updateUser = (userId) => {
 
 loadUserList();
 
-// ==============================================================================
+// ========================================================================
 // form event listener
-// ==============================================================================
+// ========================================================================
 
-formElement.addEventListener('submit', (event) => {
+getForm.addEventListener('submit', (event) => {
     event.preventDefault();
 
     const newUser = { name: nameInput.value, phone: phoneInput.value };
@@ -153,52 +161,3 @@ formElement.addEventListener('submit', (event) => {
 
     createUser(newUser);
 })
-
-// ===================================================================================
-
-
-// const loadData = (url, callback) => {
-//     fetch(url).then((response) => {
-//         response.json().then((data) => {
-//             callback(data)
-//         })
-//     })
-// }
-
-// const postData = (url, data, callback) => {
-//     const fetchOptions = {
-//         method: 'POST',
-//         headers: {'Content-type': 'application/json; charset=UTF-8'},
-//         body: JSON.stringify(data),
-//     }
-
-//     fetch(url, fetchOptions).then(() => {
-//         callback()
-//     })
-// }
-
-// const usersApiUrl = 'https://630a617ef280658a59ce43bc.mockapi.io/users'
-// const userListElement = document.querySelector('#users')
-
-// const fetchUsers = () => {
-//     loadData(usersApiUrl, (users) => {
-//         const userNames = users.map(user => `<p>${user.name}</p>`)
-//         userListElement.innerHTML = userNames.join('')
-//         console.log(users)
-//     })
-// }
-
-
-// const registerFormElement = document.querySelector('#register-form')
-// const nameInputElement = document.querySelector('#name-input')
-
-// registerFormElement.addEventListener('submit', (event) => {
-//     event.preventDefault()
-//     const userData = { name: nameInputElement.value }
-//     postData(usersApiUrl, userData, () => {
-//         fetchUsers()
-//         nameInputElement.value = ''
-//     })
-// })
-
-// fetchUsers()

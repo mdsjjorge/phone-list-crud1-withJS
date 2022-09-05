@@ -5,37 +5,55 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Phone list CRUD 1 wJS</title>
+
     <link rel="stylesheet" href="style.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Play:wght@400;700&display=swap" rel="stylesheet">
+
 </head>
 
 <body>
-    <form id="form">
-        <h3>Cadastro de nomes</h3>
-        <label>
-            Nome
-            <input id="input-name" type="text" name="name" />
-        </label>
-        <label>
-            Telefone
-            <input id="input-phone" type="tel" name="name" />
-        </label>
-        <button>Salvar</button>
-        <div id="loader">
-            <img src="img/jmLoader.svg" width="20">
-        </div>
+    <form id="get-form">
+        <fieldset>
+            <legend>[ Phone list ]</legend>
+            <label for="name">Name:</label>
+            <input type="text" name="name" id="input-name" /> <br>
+            <label for="name">Phone number:</label>
+            <input type="tel" name="phone" id="input-phone" /> <br>
+            <button type="submit">
+                <img src="img/create.png" width="30px">
+            </button>
+        </fieldset>
+        <!-- <img src="img/create.png" width="50px">
+        <img src="img/delete.png" width="50px">
+        <img src="img/read.png" width="50px">
+        <img src="img/update.png" width="50px"> -->
     </form>
+
     <div id="users"></div>
 
-    <!-- <form id="register-form">
-        <h3>Cadastro de usuário</h3>
-        <label>
-            <p>Nome</p>
-            <input id="name-input" type="text" name="name" placeholder="digite aqui o nome..."/>
-        </label>
-        <button>Enviar</button>
-    </form>
-    <div id="users"></div> -->
+    <div id="loader">
+        <img src="img/jmLoader.gif" width="89">
+    </div>
+       
+    <!-- <section id="update-modal">
+        <form id="update-form">
+            <p onclick="modalClose()"> X </p>
+            <fieldset >
+                <legend>[ Update list ]</legend>
+                <label for="name">Name:</label>
+                <input type="text" name="name" id="input-name" /> <br>
+                <label for="name">Phone number:</label>
+                <input type="tel" name="phone" id="input-phone" /> <br>
+                <button type="submit">
+                    <img src="img/update.png" width="30px">
+                </button>
+            </fieldset>
+        </form>
+    </section> -->
 
     <script src="script.js"></script>
 </body>
