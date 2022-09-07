@@ -1,163 +1,165 @@
 
 const userAPIUrl = 'https://630a617ef280658a59ce43bc.mockapi.io/phoneList';
 const loaderElement = document.querySelector('#loader');
-const getForm = document.querySelector('#get-form');
-const nameInput = document.querySelector('#input-name');
-const phoneInput = document.querySelector('#input-phone');
+const modal = document.querySelector('.modal-container');
+const tbody = document.querySelector('tbody');
+const inputName = document.querySelector('#input-name');
+const inputPhone = document.querySelector('#input-phone');
+const btnSave = document.querySelector('#btnSave');
+const modalForm = document.querySelector('#modal-form');
+
+let itens;
+let id;
+let mockId;
 
 // ========================================================================
 // show and hide Loader
 // ========================================================================
-
 const showLoader = () => {
-    loaderElement.style.display = 'block'
+    loaderElement.style.display = 'block';
 }
 const hideLoader = () => {
-    loaderElement.style.display = 'none'
+    loaderElement.style.display = 'none';
 }
-
 // ========================================================================
-// loadUserList
+// openModal
 // ========================================================================
-
-const loadUserList = () => {
-    showLoader();
-    const handleData = (users) => {
-        const userListElement = document.querySelector('#users');
-        const userNames = users.map(user => `
-        <section id="list-item">
-            <span class="user-item">
-                <p> 
-                    <strong>Name: </strong> ${user.name} | 
-                    <strong>Phone number: </strong>  ${user.phone}
-                </p>
-                <div >
-                    <button id="update-button-${user.id}" class="update-button">
-                        <img src="img/update.png" width="20px">
-                    </button> 
-                    <button id="delete-button-${user.id}" class="delete-button">
-                        <img src="img/delete.png" width="20px">
-                    </button>
-                </div>
-            </span>     
-        </section>         
-        `);
-        if (users.length > 0) {
-            userListElement.innerHTML = userNames.join('');
-            const deleteButtons = document.querySelectorAll('.delete-button');
-            deleteButtons.forEach(button => {
-                button.addEventListener('click', () => {
-                    const userId = button.id.replace('delete-button-', '');
-                    deleteUser(userId);
-                })
-            })
-        } else {
-            userListElement.innerHTML = 'Nenhum telefone cadastrado...';
+const openModal = (edit = false, index = 0) => {
+    modal.classList.add('active');
+  
+    modal.onclick = e => {
+        if (e.target.className.indexOf('modal-container') !== -1) {
+            modal.classList.remove('active');
         }
     }
-    fetch(userAPIUrl).then((response) => {
-        hideLoader();
-        response.json().then(handleData);
-    }).catch((e) => {
-        console.log(e);
-    })
+    const findItem = itens.find(t => t.id == index);
+    id = itens.indexOf(findItem);
+    mockId = index;
+  
+    if (edit) {
+        inputName.value = findItem.name;
+        inputPhone.value = findItem.phone;
+    } else {
+        inputName.value = '';
+        inputPhone.value = '';
+    }
+}
+// ========================================================================
+// editItem
+// ========================================================================
+ function editItem(index) {
+    openModal(true, index)
+}
+// ========================================================================
+// loadItens
+// ========================================================================
+ 
+function loadItens() {
+    tbody.innerHTML = '';
+    readItensBD();
 }
 
 // ========================================================================
-// updateUserList
+// handleData
 // ========================================================================
-
-// const updateUserList = () => {
-//     showLoader();
-//     const handleData = (users) => {
-//         const userListElement = document.querySelector('#users');
-//         const userNames = users.map(user => `
-//             <div class="user-item">
-//                 <p>${user.name}</p>
-//                 <p>${user.phone}</p>
-//                 <button id="delete-button-${user.id}" class="delete-button">x</button>
-//             </div>          
-//         `);
-//         if (users.length > 0) {
-//             userListElement.innerHTML = userNames.join('');
-//             const deleteButtons = document.querySelectorAll('.delete-button');
-//             deleteButtons.forEach(button => {
-//                 button.addEventListener('click', () => {
-//                     const userId = button.id.replace('delete-button-', '');
-//                     deleteUser(userId);
-//                 })
-//             })
-//         } else {
-//             userListElement.innerHTML = 'Nenhum telefone cadastrado...';
-//         }
-//     }
-//     fetch(userAPIUrl).then((response) => {
-//         hideLoader();
-//         response.json().then(handleData);
-//     }).catch((e) => {
-//         console.log(e);
-//     })
-// }
-
+const handleData = (userBody) => {
+    itens = userBody;
+    userBody.forEach(element => {       
+        let tr = document.createElement('tr');
+        // console.log(element.name, element.id);
+      
+        tr.innerHTML = `
+        <td>${element.name}</td>
+        <td>${element.phone}</td>
+        <td class="action">
+            <button onclick="editItem(${element.id})" 
+                    class="update-button">
+                <img src="img/update.png" width="20px">
+            </button> 
+        </td>
+        <td class="action">
+            <button onclick="deleteItemBD(${element.id})"
+                    class="delete-button">
+                <img src="img/delete.png" width="20px">
+            </button>
+        </td>
+        `;
+        tbody.appendChild(tr);
+    });
+}
 // ========================================================================
-// create user
+// API methods
 // ========================================================================
-
-const createUser = (newUser) => {
+// ------------------------------------ CREATE
+const createItemBD = (userBody) => {
     showLoader();
     fetch(userAPIUrl, {
         method: 'POST',
-        body: JSON.stringify(newUser),
+        body: JSON.stringify(userBody),
         headers: { 'Content-type': 'application/json; charset=UTF-8' }
     }).then(() => {
         hideLoader();
-        loadUserList();
+        loadItens();
     })
 }
+// ------------------------------------ READ
+const readItensBD = () => {
+    showLoader();
+    fetch(userAPIUrl).then((response) => {
+        hideLoader();
+        return response.json();
 
-// ========================================================================
-// delete user
-// ========================================================================
+    }).then((data) => {
+        handleData(data);
 
-const deleteUser = (userId) => {
+    }).catch((e) => {
+        console.log(e.message);
+    })
+}
+// ------------------------------------ UPDATE
+const updateItemBD = (userId, inputUser) => {
+    showLoader();
+    fetch(userAPIUrl + '/' + userId, {
+        method: 'PUT',
+        body: JSON.stringify(inputUser),
+        headers: { 'Content-type': 'application/json; charset=UTF-8' }
+    }).then(() => {
+        hideLoader();
+        loadItens();
+    })
+}
+// ------------------------------------ DELETE
+const deleteItemBD = (userId) => {
     showLoader();
     fetch(userAPIUrl + '/' + userId, {
         method: 'DELETE',
         headers: { 'Content-type': 'application/json; charset=UTF-8' }
     }).then(() => {
         hideLoader();
-        loadUserList();
+        loadItens();
     })
 }
-
-// ========================================================================
-// update user
-// ========================================================================
-
-const updateUser = (userId) => {
-    showLoader();
-    fetch(userAPIUrl + '/' + userId, {
-        method: 'PUT',
-        headers: { 'Content-type': 'application/json; charset=UTF-8' }
-    }).then(() => {
-        hideLoader();
-        updateUserList();
-    })
-}
-
-loadUserList();
-
 // ========================================================================
 // form event listener
 // ========================================================================
-
-getForm.addEventListener('submit', (event) => {
+modalForm.addEventListener('submit', (event) => {
     event.preventDefault();
 
-    const newUser = { name: nameInput.value, phone: phoneInput.value };
+    if (inputName.value == '' || inputPhone == '') {
+        alert('Please, fill all the fields!');
+    }  
+    const inputUser = { name: inputName.value, phone: inputPhone.value };
 
-    nameInput.value = '';
-    phoneInput.value = '';
+    inputName.value = '';
+    inputPhone.value = '';
 
-    createUser(newUser);
+    if (id == -1) {
+        createItemBD(inputUser);
+    } else {
+        updateItemBD(mockId, inputUser);
+    }
+    
+    modal.classList.remove('active');   
 })
+
+loadItens();

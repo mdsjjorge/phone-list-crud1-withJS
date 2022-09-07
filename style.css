@@ -20,34 +20,40 @@ button{
 }
 
 /* ========================================================
-form
+table
 ======================================================== */
-
-form{
+.table-container{
     padding: 30px;
-    min-width: 400px;
-    width: 40%;
+    max-width: 1000px;
+    margin: 0 auto;
 }
-form fieldset{
-    border-radius: 21px;
-    padding: 20px;
-    text-align: end;    
+
+table {
+    width: 100%;
+    border-collapse: collapse;
 }
-form fieldset legend{
-    margin-left: 30px;
-      
+.title{
+    display: flex;
+    justify-content: space-between;
+    padding: 10px;
+    width: 100%;    
 }
-form fieldset #input-phone{    
-    margin: 30px 0;    
+thead {
+    background: var(--lightGray);
 }
-/* form fieldset button{
-    background: none;
-    border: none;
-    cursor: pointer;
-} */
-form fieldset button:hover{
-    scale: 1.5;
-    
+ tr {
+    border-bottom: 1px solid var(--lightGray)!important;
+}
+thead tr th{
+    padding: 12px;
+}
+.action{
+    width: 29px;
+}
+td{
+    width: 50%;
+    padding: 5px;
+    text-align: center;
 }
 
 /* ========================================================
@@ -89,43 +95,52 @@ modais
     transform: translate(-50%, -50%);
 }
 
-/* -------------------------------- update */
+/* -------------------------------- form */
 
-#update-modal{
-    background: var(--blueT);
+.modal-container{
     width: 100vw;
     height: 100vh;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-
-
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: var(--blueT);
+    display: none;
+    /* display: flex; */
+    z-index: 999;
+    align-items: center;
+    justify-content: center;
 }
-#update-form{
+.active {
+    display: flex;
+}
+#modal-form{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px;
     background-color: white;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);  
+    border-radius: 21px;
+    width: 90%;
+    max-width: 700px;
 }
-#update-form p{
+#modal-form .close{
     float: right;
     cursor: pointer;
 }
-#update-form fieldset{
+#modal-form fieldset{
+    width: 100%;
+    min-width: 350px;
     border-radius: 21px;
     padding: 30px;
     text-align: end;    
 }
-#update-form fieldset #input-phone{    
+#modal-form fieldset #input-phone{    
     margin: 30px 0;    
 }
-#update-form fieldset button{
+#modal-form fieldset button{
     border: none;
     cursor: pointer;
 }
-#update-form fieldset button:hover{
-    scale: 1.5;
-    
+#modal-form fieldset button:hover{
+    scale: 1.5;    
 }

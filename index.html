@@ -16,6 +16,52 @@
 </head>
 
 <body>
+    <section class="table-container">
+        <table>
+            <div class="title">
+                <h2><strong>Phone list</strong></h2>  
+                <button onclick="openModal()">                    
+                    <img src="img/create.png" width="30px">
+                </button>
+            </div>
+            <thead>
+                <tr>
+                    <th>Name</th>
+                    <th>Phone</th>
+                    <th>Update</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+            </tbody>
+        </table>
+    </section>
+
+    <section class="modal-container">
+        <form id="modal-form">
+            <fieldset>
+                <legend>[ Update list ]</legend>
+
+                <label for="input-name">Name:</label>
+                <input id="input-name" type="text" name="name" /> <br>
+
+                <label for="input-phone">Phone number:</label>
+                <input id="input-phone" type="tel" name="phone" /> <br>
+
+                <button type="submit" id="btnSave">
+                    <img src="img/update.png" width="30px">
+                </button>
+            </fieldset>
+        </form>
+    </section>
+
+    <div id="loader">
+        <img src="img/jmLoader.gif" width="89">
+    </div>
+
+
+
+<!-- 
     <form id="get-form">
         <fieldset>
             <legend>[ Phone list ]</legend>
@@ -27,10 +73,6 @@
                 <img src="img/create.png" width="30px">
             </button>
         </fieldset>
-        <!-- <img src="img/create.png" width="50px">
-        <img src="img/delete.png" width="50px">
-        <img src="img/read.png" width="50px">
-        <img src="img/update.png" width="50px"> -->
     </form>
 
     <div id="users"></div>
@@ -38,16 +80,19 @@
     <div id="loader">
         <img src="img/jmLoader.gif" width="89">
     </div>
-       
-    <!-- <section id="update-modal">
+
+    <section id="update-modal">
         <form id="update-form">
-            <p onclick="modalClose()"> X </p>
-            <fieldset >
+            <button class="close" onclick="modalClose()" type="submit">
+                <img src="img/close.png" width="20px">
+            </button>
+
+            <fieldset>
                 <legend>[ Update list ]</legend>
                 <label for="name">Name:</label>
-                <input type="text" name="name" id="input-name" /> <br>
+                <input type="text" name="name" id="update-input-name" /> <br>
                 <label for="name">Phone number:</label>
-                <input type="tel" name="phone" id="input-phone" /> <br>
+                <input type="tel" name="phone" id="update-input-phone" /> <br>
                 <button type="submit">
                     <img src="img/update.png" width="30px">
                 </button>
@@ -66,5 +111,6 @@
     https://www.flaticon.com/
     https://loading.io/
     https://mockapi.io/
+    https://github.com/WilliamDosSantos/CRUD-JavaScript
 
 -->
