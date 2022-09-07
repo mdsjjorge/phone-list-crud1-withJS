@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Phone list CRUD 1 wJS</title>
+    <title>Phone list CRUD 1 with JavaScript</title>
 
     <link rel="stylesheet" href="style.css">
 
@@ -16,11 +16,31 @@
 </head>
 
 <body>
+<!-- ==================================================================
+header
+=================================================================== -->
+    <header>
+        <nav class="nav-container">
+            <h1 class="nav-container-psdt">Phone list</h1>
+            <span >
+                <p>GitHub repo => {            
+                    <button class="button" onclick="location.href='https://github.com/mdsjjorge/phone-list-crud1-withJS'" type="button">
+                        <p>Check</p>
+                    </button> 
+                }
+                </p>
+            </span>
+        </nav>
+    </header>
+<!-- ==================================================================
+main
+=================================================================== -->   
+<main>
     <section class="table-container">
         <table>
             <div class="title">
                 <h2><strong>Phone list</strong></h2>  
-                <button onclick="openModal()">                    
+                <button  onclick="openModal()">                    
                     <img src="img/create.png" width="30px">
                 </button>
             </div>
@@ -54,63 +74,42 @@
             </fieldset>
         </form>
     </section>
+</main>
 
     <div id="loader">
         <img src="img/jmLoader.gif" width="89">
     </div>
-
-
-
-<!-- 
-    <form id="get-form">
-        <fieldset>
-            <legend>[ Phone list ]</legend>
-            <label for="name">Name:</label>
-            <input type="text" name="name" id="input-name" /> <br>
-            <label for="name">Phone number:</label>
-            <input type="tel" name="phone" id="input-phone" /> <br>
-            <button type="submit">
-                <img src="img/create.png" width="30px">
-            </button>
-        </fieldset>
-    </form>
-
-    <div id="users"></div>
-
-    <div id="loader">
-        <img src="img/jmLoader.gif" width="89">
-    </div>
-
-    <section id="update-modal">
-        <form id="update-form">
-            <button class="close" onclick="modalClose()" type="submit">
-                <img src="img/close.png" width="20px">
-            </button>
-
-            <fieldset>
-                <legend>[ Update list ]</legend>
-                <label for="name">Name:</label>
-                <input type="text" name="name" id="update-input-name" /> <br>
-                <label for="name">Phone number:</label>
-                <input type="tel" name="phone" id="update-input-phone" /> <br>
-                <button type="submit">
-                    <img src="img/update.png" width="30px">
-                </button>
-            </fieldset>
-        </form>
-    </section> -->
+<!-- ==================================================================
+footer
+=================================================================== -->   
+    <footer>
+        <div class="jm-footer">
+            <span>
+                <p>Reference:</p>
+            </span>
+            <ul>
+                <li><a target="_blank" href="https://github.com/carlosdigitalcollege/aulas-fetch/blob/main/index-aula-tarde.html"> Carlos DC </a></li>
+                <li><a target="_blank" href="https://github.com/WilliamDosSantos/CRUD-JavaScript"> William S </a></li>
+                <li><a target="_blank" href="https://mockapi.io/"> mock API </a></li>
+            </ul>                
+        </div>
+        <span >
+            <p class="jm-footer-copy">
+                coded by: Jorge Mendonça
+                <a  target="_blank" href="https://github.com/mdsjjorge"><img width="30px" src="icon/github.png" alt="github"></a>
+                <a  target="_blank" href="https://www.linkedin.com/in/mdsjjorge/"><img width="30px" src="icon/linkedin.png" alt="github"></a>
+            </p>
+        </span>
+    </footer>
 
     <script src="script.js"></script>
+
 </body>
 
 </html>
 
 
-<!-- from 
-    https://github.com/carlosdigitalcollege/aulas-fetch/blob/main/index-aula-tarde.html 
+<!-- src 
     https://www.flaticon.com/
     https://loading.io/
-    https://mockapi.io/
-    https://github.com/WilliamDosSantos/CRUD-JavaScript
-
 -->

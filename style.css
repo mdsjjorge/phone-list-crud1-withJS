@@ -17,17 +17,49 @@ button{
     --blue : rgba(34, 55, 233);
     --blueT : rgba(34, 55, 233, 0.3);
     --lightGray : rgb(219, 221, 226);
+    --heavyGray : rgb(180, 180, 180);
 }
-
-/* ========================================================
-table
-======================================================== */
+/* ===================================================
+nav container
+=================================================== */
+.nav-container {
+    width: 100%;
+    height: 120px; 
+    font-size: 15px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.nav-container-psdt {
+    padding: 0 30px;
+    font-size: 40px;
+    font-weight: 700;
+    color: var(--green);
+}
+.button {
+    width: 100px;
+    height: 45px;
+    border-radius: 10px;
+    background: var(--blue);
+    border-style: none;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 700;
+    color: white;
+}
+/* ===================================================
+section main - table
+=================================================== */
+main {
+    background-color: var(--heavyGray);
+    min-height: 380px;
+    border-radius: 30px;
+}
 .table-container{
     padding: 30px;
     max-width: 1000px;
     margin: 0 auto;
 }
-
 table {
     width: 100%;
     border-collapse: collapse;
@@ -55,30 +87,11 @@ td{
     padding: 5px;
     text-align: center;
 }
-
-/* ========================================================
-list-item
-======================================================== */
-#list-item{
-    display: flex;
-    flex-direction: column;
-}
-.user-item{
-    display: flex;
-    justify-content: space-between;
-    padding: 5px;
-    border: 1px var(--lightGray) solid;
-}
-.delete-button{
-    margin: 0 8px;
-}
-
 /* ========================================================
 modais
 ======================================================== */
 
 /* -------------------------------- loader */
-
 #loader {
     background: var(--blueT);
     width: 100vw;
@@ -94,9 +107,7 @@ modais
     left: 50%;
     transform: translate(-50%, -50%);
 }
-
 /* -------------------------------- form */
-
 .modal-container{
     width: 100vw;
     height: 100vh;
@@ -121,7 +132,8 @@ modais
     background-color: white;
     border-radius: 21px;
     width: 90%;
-    max-width: 700px;
+    max-width: 600px;
+    min-width: 400px;
 }
 #modal-form .close{
     float: right;
@@ -129,7 +141,7 @@ modais
 }
 #modal-form fieldset{
     width: 100%;
-    min-width: 350px;
+    min-width: 400px;
     border-radius: 21px;
     padding: 30px;
     text-align: end;    
@@ -144,3 +156,43 @@ modais
 #modal-form fieldset button:hover{
     scale: 1.5;    
 }
+/* ===================================================
+footer
+=================================================== */
+
+footer {
+    color: var(--dark-gray);
+    text-decoration: none;
+    font-style: normal;    
+    padding: 0 30px ;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.jm-footer{
+    display: flex;
+}
+.jm-footer span{
+    margin-top: 25px;
+}
+.jm-footer ul {
+    list-style: none;
+}
+.jm-footer ul li{
+    margin: 10px;
+}
+.jm-footer ul a {
+    list-style: none;
+    text-decoration: none;
+    font-style: normal;
+    color: var(--dark-gray);
+}
+.jm-footer-copy {
+    display: flex;
+    align-items: center;
+    padding: 5px;
+}
+.jm-footer-copy a {
+    margin: 8px;
+}
+
