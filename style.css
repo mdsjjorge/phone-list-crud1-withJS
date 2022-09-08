@@ -6,6 +6,8 @@
 
 body {
     font-family: 'Play', sans-serif;
+    max-width: 1000px;
+    margin: 0 auto;
 }
 button{
     background: none;
@@ -29,12 +31,7 @@ nav container
     display: flex;
     align-items: center;
     justify-content: space-between;
-}
-.nav-container-psdt {
     padding: 0 30px;
-    font-size: 40px;
-    font-weight: 700;
-    color: var(--green);
 }
 .button {
     width: 100px;
@@ -46,6 +43,7 @@ nav container
     font-size: 14px;
     font-weight: 700;
     color: white;
+    
 }
 /* ===================================================
 section main - table
@@ -56,24 +54,31 @@ main {
     border-radius: 30px;
 }
 .table-container{
-    padding: 30px;
-    max-width: 1000px;
+    padding: 30px;    
     margin: 0 auto;
+    max-height: 55vh;
+    overflow: auto;
+}
+.table-container::-webkit-scrollbar {
+    width: 25px;
+}
+.table-container::-webkit-scrollbar-thumb {
+    border-top-right-radius: 30px;
+    border-end-end-radius: 30px;
+    background: var(--lightGray);
 }
 table {
     width: 100%;
     border-collapse: collapse;
 }
-.title{
-    display: flex;
-    justify-content: space-between;
-    padding: 10px;
-    width: 100%;    
+.new{
+    float: right;
+    padding: 0 20px 15px 0;
 }
 thead {
     background: var(--lightGray);
 }
- tr {
+tr {
     border-bottom: 1px solid var(--lightGray)!important;
 }
 thead tr th{
@@ -156,12 +161,40 @@ modais
 #modal-form fieldset button:hover{
     scale: 1.5;    
 }
+/* -------------------------------- delete */
+.delete-container{
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: var(--blueT);
+    display: none;
+    /* display: flex; */
+    z-index: 999;
+    align-items: center;
+    justify-content: center;
+}
+.delete-modal{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 30px;
+    background-color: white;
+    border-radius: 21px;
+    width: 90%;
+    max-width: 300px;
+    min-width: 100px;
+}
+.delete-modal button {
+    margin-top: 15px;
+}
+
 /* ===================================================
 footer
 =================================================== */
 
 footer {
-    color: var(--dark-gray);
     text-decoration: none;
     font-style: normal;    
     padding: 0 30px ;
@@ -173,10 +206,12 @@ footer {
     display: flex;
 }
 .jm-footer span{
-    margin-top: 25px;
+    display: flex;
+    align-items: center;
 }
 .jm-footer ul {
     list-style: none;
+    color: var(--blue);
 }
 .jm-footer ul li{
     margin: 10px;
@@ -185,7 +220,6 @@ footer {
     list-style: none;
     text-decoration: none;
     font-style: normal;
-    color: var(--dark-gray);
 }
 .jm-footer-copy {
     display: flex;
@@ -195,4 +229,20 @@ footer {
 .jm-footer-copy a {
     margin: 8px;
 }
-
+/* ===================================================
+media query
+=================================================== */
+@media screen and (max-width: 660px) {
+    
+    .nav-container {
+        display: flex;
+        flex-direction: column;
+        height: 200px;
+        justify-content: center;
+    }
+    /* =================================== */
+    footer{
+        display: block;
+        padding: 10px;
+    }
+  }

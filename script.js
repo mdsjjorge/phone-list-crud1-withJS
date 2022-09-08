@@ -2,10 +2,10 @@
 const userAPIUrl = 'https://630a617ef280658a59ce43bc.mockapi.io/phoneList';
 const loaderElement = document.querySelector('#loader');
 const modal = document.querySelector('.modal-container');
+const delModal = document.querySelector('.delete-container');
 const tbody = document.querySelector('tbody');
 const inputName = document.querySelector('#input-name');
 const inputPhone = document.querySelector('#input-phone');
-const btnSave = document.querySelector('#btnSave');
 const modalForm = document.querySelector('#modal-form');
 
 let itens;
@@ -22,14 +22,34 @@ const hideLoader = () => {
     loaderElement.style.display = 'none';
 }
 // ========================================================================
+// closeModal
+// ========================================================================
+const closeModal = () => {
+    delModal.style.display = 'none';
+    modal.style.display = 'none';
+}
+// ========================================================================
+// openDelModal
+// ========================================================================
+const openDelModal = (index) => {
+    delModal.style.display = 'flex';
+    mockId = index;
+  
+    delModal.onclick = e => {
+        if (e.target.className.indexOf('delete-container') !== -1) {
+            delModal.style.display = 'none';
+        }
+    }
+}
+// ========================================================================
 // openModal
 // ========================================================================
 const openModal = (edit = false, index = 0) => {
-    modal.classList.add('active');
+    modal.style.display = 'flex';
   
     modal.onclick = e => {
         if (e.target.className.indexOf('modal-container') !== -1) {
-            modal.classList.remove('active');
+            modal.style.display = 'none';
         }
     }
     const findItem = itens.find(t => t.id == index);
@@ -52,13 +72,11 @@ const openModal = (edit = false, index = 0) => {
 }
 // ========================================================================
 // loadItens
-// ========================================================================
- 
+// ======================================================================== 
 function loadItens() {
     tbody.innerHTML = '';
     readItensBD();
 }
-
 // ========================================================================
 // handleData
 // ========================================================================
@@ -78,7 +96,7 @@ const handleData = (userBody) => {
             </button> 
         </td>
         <td class="action">
-            <button onclick="deleteItemBD(${element.id})"
+            <button onclick="openDelModal(${element.id})"
                     class="delete-button">
                 <img src="img/delete.png" width="20px">
             </button>
@@ -129,9 +147,10 @@ const updateItemBD = (userId, inputUser) => {
     })
 }
 // ------------------------------------ DELETE
-const deleteItemBD = (userId) => {
+const deleteItemBD = () => {
+    delModal.style.display = 'none';
     showLoader();
-    fetch(userAPIUrl + '/' + userId, {
+    fetch(userAPIUrl + '/' + mockId, {
         method: 'DELETE',
         headers: { 'Content-type': 'application/json; charset=UTF-8' }
     }).then(() => {
@@ -144,22 +163,21 @@ const deleteItemBD = (userId) => {
 // ========================================================================
 modalForm.addEventListener('submit', (event) => {
     event.preventDefault();
+    const inputUser = { name: inputName.value, phone: inputPhone.value };
 
     if (inputName.value == '' || inputPhone == '') {
         alert('Please, fill all the fields!');
-    }  
-    const inputUser = { name: inputName.value, phone: inputPhone.value };
-
-    inputName.value = '';
-    inputPhone.value = '';
-
-    if (id == -1) {
+        return;
+    } else if (id == -1) {
         createItemBD(inputUser);
     } else {
         updateItemBD(mockId, inputUser);
     }
-    
-    modal.classList.remove('active');   
+
+    closeModal();
+
+    inputName.value = '';
+    inputPhone.value = '';  
 })
 
 loadItens();

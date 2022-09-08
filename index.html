@@ -38,12 +38,11 @@ main
 <main>
     <section class="table-container">
         <table>
-            <div class="title">
-                <h2><strong>Phone list</strong></h2>  
-                <button  onclick="openModal()">                    
+            <caption >
+                <button class="new" onclick="openModal()">                    
                     <img src="img/create.png" width="30px">
                 </button>
-            </div>
+            </caption>
             <thead>
                 <tr>
                     <th>Name</th>
@@ -52,8 +51,10 @@ main
                     <th>Delete</th>
                 </tr>
             </thead>
-            <tbody>
-            </tbody>
+            <section class="tbody">
+                <tbody >
+                </tbody>
+            </section>
         </table>
     </section>
 
@@ -74,6 +75,20 @@ main
             </fieldset>
         </form>
     </section>
+
+    <section class="delete-container">
+        <div class="delete-modal">
+            <p>Confirm delete this item?</p>
+            <button class="button" onclick="deleteItemBD()">
+                yes
+            </button>
+            <button class="button" onclick="closeModal()" >
+                no
+            </button>
+        </div>
+    </section>
+
+
 </main>
 
     <div id="loader">
